@@ -1,0 +1,45 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .dashboard-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+        .dashboard-title {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        .dashboard-content {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="dashboard-container">
+            <h2 class="dashboard-title">User Dashboard</h2>
+            <div class="dashboard-content">
+                <p>Welcome, {{ user.username }}!</p>
+                <p>This is your dashboard where you can manage your account.</p>
+                <p><a href="{% url 'logout' %}">Logout</a></p>  <!-- Logout link -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

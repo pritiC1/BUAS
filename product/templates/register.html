@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="date"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-group.gender {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-group input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+
+        .otp-section {
+            display: none;
+        }
+
+        .otp-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <h2>Register</h2>
+    <form method="POST">
+        {% csrf_token %}
+        
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="middle_name">Middle Name</label>
+                <input type="text" id="middle_name" name="middle_name">
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" required>
+            </div>
+        </div>    
+
+        <div class="form-group">
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+
+        <div class="form-group gender">
+            <label for="gender">Gender</label>
+            <label><input type="radio" name="gender" value="male" required> Male</label>
+            <label><input type="radio" name="gender" value="female" required> Female</label>
+            <label><input type="radio" name="gender" value="other" required> Other</label>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="contact">contact number</label>
+            <input type="contact" id="contact" name="contact">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+        </div>
+    
+        <button type="submit" class="btn-submit">Register</button>
+    </form>
+
+    <div class="otp-section" id="otp-section">
+        <h2>Verify OTP</h2>
+        <form method="POST" id="otp-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="otp">Enter OTP</label>
+                <input type="text" id="otp" name="otp" required>
+            </div>
+            <button type="submit" class="btn-submit">Verify OTP</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('registration-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Simulate successful registration and OTP sending
+        alert('Registration successful! An OTP has been sent to your email.');
+
+        // Hide registration form and show OTP verification form
+        document.getElementById('registration-form').style.display = 'none';
+        document.getElementById('otp-section').classList.add('active');
+    });
+
+    document.getElementById('otp-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const otp = document.getElementById('otp').value;
+
+        // Simulate OTP verification process (actual verification should be server-side)
+        if (otp === "123456") {
+            alert('OTP verified! Your account is now active.');
+            window.location.href = "/login";  // Redirect to login page after successful OTP verification
+        } else {
+            alert('Invalid OTP. Please try again.');
+        }
+    });
+</script>
+
+
+
+</body>
+</html>
